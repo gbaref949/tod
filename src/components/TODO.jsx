@@ -218,6 +218,13 @@ const TODO = () => {
       ? todos
       : todos.filter((todo) => todo.category === selectedCategory);
 
+  // Sort tasks by due date
+  const sortedTodos = filteredTodos.sort((a, b) => {
+    if (!a.dueDate) return 1; // Tasks without due date are considered last
+    if (!b.dueDate) return -1;
+    return new Date(a.dueDate) - new Date(b.dueDate);
+  });
+
   return (
     <div className='todos'>
       <div className='todos__content'>
@@ -286,7 +293,7 @@ const TODO = () => {
           </select>
         </div>
         <div className='todos__todo'>
-          {filteredTodos.map((todo) => {
+          {sortedTodos.map((todo) => {
             return <Todo key={todo.id} todo={todo} dispatch={dispatch} />;
           })}
         </div>
