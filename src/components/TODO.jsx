@@ -39,7 +39,14 @@ function reducer(state, action) {
     case actionTypes.EDIT_CATEGORY:
       return state.map((category) =>
         category.id === action.payload.id
-          ? { ...category, name: action.payload.name }
+          ? {
+              ...category,
+              name: action.payload.name,
+              description: action.payload.description,
+              category: action.payload.category,
+              priority: action.payload.priority,
+              dueDate: action.payload.dueDate,
+            }
           : category
       );
 
