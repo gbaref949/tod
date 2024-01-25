@@ -26,7 +26,7 @@ body{
 }
 
 .todos__content {
-  border: 1px solid lightgray;
+  /* border: 1px solid lightgray; */
   padding: 40px 200px;
   box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.2);
   z-index: 999;
