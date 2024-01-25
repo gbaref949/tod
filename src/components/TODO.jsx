@@ -1,6 +1,6 @@
 import { useReducer, useState, useEffect } from 'react';
 
-const initialState = {
+const actionTypes = {
   ADD_TODO: 'add_todo',
   EDIT_TODO: 'edit_todo',
   DELETE_TODO: 'delete_todo',
@@ -13,10 +13,10 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
-    case initialState.ADD_TODO:
+    case actionTypes.ADD_TODO:
       return [...state, newTodo(action.payload)];
 
-    case initialState.EDIT_TODO:
+    case actionTypes.EDIT_TODO:
       return state.map((todo) =>
         todo.id === action.payload.id
           ? {
@@ -30,30 +30,30 @@ function reducer(state, action) {
           : todo
       );
 
-    case initialState.DELETE_TODO:
+    case actionTypes.DELETE_TODO:
       return state.filter((todo) => todo.id !== action.payload.id);
 
-    case initialState.ADD_CATEGORY:
+    case actionTypes.ADD_CATEGORY:
       return [...state, newCategory(action.payload)];
 
-    case initialState.EDIT_CATEGORY:
+    case actionTypes.EDIT_CATEGORY:
       return state.map((category) =>
         category.id === action.payload.id
           ? { ...category, name: action.payload.name }
           : category
       );
 
-    case initialState.DELETE_CATEGORY:
+    case actionTypes.DELETE_CATEGORY:
       return state.filter((category) => category.id !== action.payload.id);
 
-    case initialState.SET_PRIORITY:
+    case actionTypes.SET_PRIORITY:
       return state.map((todo) =>
         todo.id === action.payload.id
           ? { ...todo, priority: action.payload.priority }
           : todo
       );
 
-    case initialState.SET_DUE_DATE:
+    case actionTypes.SET_DUE_DATE:
       return state.map((todo) =>
         todo.id === action.payload.id
           ? { ...todo, dueDate: action.payload.dueDate }
@@ -95,7 +95,7 @@ function Todo({ todo, dispatch }) {
 
   const handleSaveEdit = () => {
     dispatch({
-      type: initialState.EDIT_TODO,
+      type: actionTypes.EDIT_TODO,
       payload: {
         id: todo.id,
         name: editedName,
@@ -161,7 +161,7 @@ function Todo({ todo, dispatch }) {
           className='todo__delete'
           onClick={() =>
             dispatch({
-              type: initialState.DELETE_TODO,
+              type: actionTypes.DELETE_TODO,
               payload: { id: todo.id },
             })
           }
@@ -198,7 +198,7 @@ const TODO = () => {
     }
 
     dispatch({
-      type: initialState.ADD_TODO,
+      type: actionTypes.ADD_TODO,
       payload: { name, description, category, priority, dueDate },
     });
 
